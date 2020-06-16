@@ -11,5 +11,15 @@ class Siswa extends Model
     //Bila mengikuti aturan tersebut tidak perlu membuat properti seperti dibawah
     //Kalo Model Siswa => Tabel siswas kan jadi aneh
     protected $table = 'siswa';
-    protected $fillable = ['nama_depan','nama_belakang','jenis_kelamin','agama','alamat'];
+    //Properti fillable untuk memungkinkan mass assignment
+    protected $fillable = ['nama_depan','nama_belakang','jenis_kelamin','agama','alamat','avatar'];
+
+    public function getAvatar()
+    {
+        if(!$this->avatar){
+            return asset('images/default.jpg');
+        }
+
+        return asset('images/'.$this->avatar);
+    }
 }

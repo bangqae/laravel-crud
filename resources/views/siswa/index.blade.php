@@ -23,25 +23,29 @@
                     <tr>
                       <th>Nama Depan</th>
                       <th>Nama Belakang</th>
-                      <th>Kelamin</th>
+                      {{-- <th>Kelamin</th>
                       <th>Agama</th>
-                      <th>Alamat</th>
+                      <th>Alamat</th> --}}
                       <th>Aksi</th>
                     </tr>
                   </thead>
                   
                   @foreach ($data_siswa as $siswa)
-                  <tr>
-                    <td>{{$siswa->nama_depan}}</td>
-                    <td>{{$siswa->nama_belakang}}</td>
-                    <td>{{$siswa->jenis_kelamin}}</td>
-                    <td>{{$siswa->agama}}</td>
-                    <td>{{$siswa->alamat}}</td>
-                    <td>
-                        <a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="/siswa/{{$siswa->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau dihapus ?')">Delete</a>
-                    </td>
-                  </tr>    
+                  
+                    <tr>
+                      
+                      <td><a href="/siswa/{{$siswa->id}}/profile">{{$siswa->nama_depan}}</a></td>
+                      <td><a href="/siswa/{{$siswa->id}}/profile">{{$siswa->nama_belakang}}</a></td>
+                      {{-- <td>{{$siswa->jenis_kelamin}}</td>
+                      <td>{{$siswa->agama}}</td>
+                      <td>{{$siswa->alamat}}</td> --}}
+                      <td>
+                          <a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                          <a href="/siswa/{{$siswa->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin mau dihapus ?')">Delete</a>
+                      </td>
+                    
+                    </tr>
+                     
                   @endforeach
                   
               </table>
@@ -90,6 +94,10 @@
                             <label for="">Alamat</label>
                             <textarea name="alamat" class="form-control" id="" rows="2"></textarea>
                         </div>
+                        <div class="form-group">
+                          <label for="">Avatar</label>
+                          <input type="file" name="avatar" id="avatar" value="">
+                      </div>
                         
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
