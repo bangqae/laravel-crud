@@ -69,7 +69,7 @@
                 {{-- </button> --}}
             </div>
                 <div class="modal-body">
-                     <form action="/siswa/create" method="POST"> {{-- route --}}
+                     <form action="/siswa/create" method="POST" enctype="multipart/form-data"> {{-- route --}}
                         @csrf
                         <div class="form-group">
                             <label for="">Nama Depan</label>
@@ -78,6 +78,10 @@
                         <div class="form-group">
                             <label for="">Nama Belakang</label>
                             <input name="nama_belakang" type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Nama Belakang">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input name="email" type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label for="">Kelamin</label>
@@ -111,6 +115,7 @@
 {{-- End of modal --}}
 @stop
 
+{{-- Gak dipake --}}
 @section('content1')
             @if (session('sukses'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

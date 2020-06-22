@@ -12,14 +12,14 @@ class Siswa extends Model
     //Kalo Model Siswa => Tabel siswas kan jadi aneh
     protected $table = 'siswa';
     //Properti fillable untuk memungkinkan mass assignment
-    protected $fillable = ['nama_depan','nama_belakang','jenis_kelamin','agama','alamat','avatar'];
+    protected $fillable = ['user_id','nama_depan','nama_belakang','jenis_kelamin','agama','alamat','avatar'];
 
     public function getAvatar()
     {
         if(!$this->avatar){
             return asset('images/default.jpg');
         }
-
+        //Kalo ada gambarnya tampilkan
         return asset('images/'.$this->avatar);
     }
 }

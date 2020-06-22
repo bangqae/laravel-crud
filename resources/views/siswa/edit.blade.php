@@ -25,6 +25,10 @@
                       value="{{$siswa->nama_belakang}}">
                   </div>
                   <div class="form-group">
+                    <label for="">Email</label>
+                    <input name="email" type="email" class="form-control" id="" aria-describedby="emailHelp" placeholder="Email">
+                  </div>
+                  <div class="form-group">
                       <label for="">Kelamin</label>
                       <select name="jenis_kelamin" class="form-control" id="">
                           <option value="L" @if ($siswa->jenis_kelamin == 'L')

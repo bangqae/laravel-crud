@@ -13,6 +13,7 @@
               <div class="profile-header">
                 <div class="overlay"></div>
                 <div class="profile-main">
+                  {{-- Method getAvatar() dari model Siswa --}}
                   <img src="{{$siswa->getAvatar()}}" class="img-circle" alt="Avatar" height="90px">
                   <h3 class="name">{{$siswa->nama_depan}}&nbsp;{{$siswa->nama_belakang}}</h3>
                   <span class="online-status status-available">Available</span>
@@ -38,6 +39,7 @@
                   <h4 class="heading">Info</h4>
                   <ul class="list-unstyled list-justify">
                     {{-- <li>Kelamin <span>{{$siswa->jenis_kelamin}}</span></li> --}}
+                    {{-- <li>Email <span>{{$siswa->email}}</span></li> --}}
                     <li>Kelamin <span>{{$siswa->jenis_kelamin === 'L' ? 'Laki-laki':'Perempuan'}}</span></li>
                     <li>Alamat <span>{{$siswa->alamat}}</span></li>
                     <li>Agama <span>{{$siswa->agama}}</span></li>

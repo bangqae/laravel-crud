@@ -19,9 +19,13 @@ Route::get('/login','AuthController@login')->name('login');
 Route::any('/postlogin','AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
 
-//Route::group(['middleware' => 'auth'], function () {
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','checkRole:admin,siswa'])->group(function () {
     Route::get('/dashboard','DashboardController@index');
+});
+
+//Route::group(['middleware' => 'auth'], function () {
+Route::middleware(['auth','checkRole:admin'])->group(function () {
+    //Route::get('/dashboard','DashboardController@index');
     Route::get('/siswa','SiswaController@index');
     Route::post('/siswa/create','SiswaController@create');
     Route::get('/siswa/{id}/edit','SiswaController@edit');
