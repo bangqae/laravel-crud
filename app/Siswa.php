@@ -22,4 +22,14 @@ class Siswa extends Model
         //Kalo ada gambarnya tampilkan
         return asset('images/'.$this->avatar);
     }
+
+    public function mapel()
+    {
+        return $this->belongsToMany(Mapel::class)->withPivot(['nilai']);//Dari tabel pivot mapel_siswa
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
