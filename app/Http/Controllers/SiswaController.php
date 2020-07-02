@@ -19,6 +19,15 @@ class SiswaController extends Controller
 
     public function create(Request $request)
     {
+        $this->validate($request,[
+            'nama_depan' => 'required|min:5',
+            'email' => 'required|email|unique:users',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'alamat' => 'required',
+            'avatar' => 'image|mimes:jpeg,png',
+        ]);
+        
         // Insert ke tabel users
         $user = new  \App\User;
         $user->role = 'siswa';
@@ -30,7 +39,7 @@ class SiswaController extends Controller
         
         // Insert ke tabel siswa
         // Bagian ini diletakkan di bawah agar
-        // $siswa->user_id mendapat nilai dari $user->id
+        // field user_id di tabel siswa mendapat nilai dari id di tabel user
         $request->request->add(['user_id' => $user->id]);
         $siswa = \App\Siswa::create($request->all());
 
@@ -73,6 +82,21 @@ class SiswaController extends Controller
     public function profile($id)
     {
         $siswa = \App\Siswa::find($id);
-        return view('siswa.profile',['siswa' => $siswa]);
+        $matapelajaran = \App\Mapel::all();
+        //dd($matapelajaran);
+        return view('siswa.profile',['siswa' => $siswa,'matapelajaran' => $matapelajaran]);
+    }
+
+    public function addnilai(Request $request, $idsiswa) //$idsiswa disini maksudnya id siswa yg di url, bisa juga ditulis $id
+    {
+        //dd($request->all());
+        $siswa = \App\Siswa::find($idsiswa);
+        if ($siswa->mapel()->where('mapel_id', $request->mapel)->exists())
+        {
+            return redirect('siswa/'.$idsiswa.'/profile')->with('error','Nilai sudah ada!');
+        }
+        $siswa->mapel()->attach($request->mapel,['nilai' => $request->nilai]);
+
+        return redirect('siswa/'.$idsiswa.'/profile')->with('sukses','Nilai tersimpan!');
     }
 }

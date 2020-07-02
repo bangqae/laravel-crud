@@ -23,9 +23,9 @@ class Siswa extends Model
         return asset('images/'.$this->avatar);
     }
 
-    public function mapel()
+    public function mapel() //Relasi tabel siswa dengan mapel
     {
-        return $this->belongsToMany(Mapel::class)->withPivot(['nilai']);//Dari tabel pivot mapel_siswa
+        return $this->belongsToMany(Mapel::class)->withPivot(['nilai'])->withTimeStamps();//Dari tabel pivot mapel_siswa
     }
 
     public function user()
