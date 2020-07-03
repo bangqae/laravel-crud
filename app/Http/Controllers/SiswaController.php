@@ -84,7 +84,19 @@ class SiswaController extends Controller
         $siswa = \App\Siswa::find($id);
         $matapelajaran = \App\Mapel::all();
         //dd($matapelajaran);
-        return view('siswa.profile',['siswa' => $siswa,'matapelajaran' => $matapelajaran]);
+        // Menyiapkan data untuk chart
+        $catergories = [];
+        $data = [];
+
+        foreach ($matapelajaran as $mp) {
+            if ($siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()) {
+                $catergories[] = $mp->nama;
+                $data[] = $siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()->pivot->nilai;
+            }
+        }
+        //dd($data);
+        //dd($catergories);
+        return view('siswa.profile',['siswa' => $siswa,'matapelajaran' => $matapelajaran, 'categories' => $catergories, 'data' => $data]);
     }
 
     public function addnilai(Request $request, $idsiswa) //$idsiswa disini maksudnya id siswa yg di url, bisa juga ditulis $id

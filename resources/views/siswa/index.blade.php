@@ -32,24 +32,22 @@
 
                                 @foreach($data_siswa as $siswa)
 
-                                    <tr>
+                                <tr>
 
-                                        <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_depan }}</a>
-                                        </td>
-                                        <td><a
-                                                href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_belakang }}</a>
-                                        </td>
-                                        <td>{{ $siswa->jenis_kelamin }}</td>
-                                        <td>{{ $siswa->agama }}</td>
-                                        <td>{{ $siswa->alamat }}</td>
-                                        <td>
-                                            <a href="/siswa/{{ $siswa->id }}/edit"
-                                                class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="/siswa/{{ $siswa->id }}/delete" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Yakin mau dihapus ?')">Delete</a>
-                                        </td>
+                                    <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_depan }}</a>
+                                    </td>
+                                    <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_belakang }}</a>
+                                    </td>
+                                    <td>{{ $siswa->jenis_kelamin }}</td>
+                                    <td>{{ $siswa->agama }}</td>
+                                    <td>{{ $siswa->alamat }}</td>
+                                    <td>
+                                        <a href="/siswa/{{ $siswa->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="/siswa/{{ $siswa->id }}/delete" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Yakin mau dihapus ?')">Delete</a>
+                                    </td>
 
-                                    </tr>
+                                </tr>
 
                                 @endforeach
 
@@ -81,13 +79,12 @@
 
                     <div class="row">
 
-                        <div
-                            class="col-md-6 form-group {{ $errors->has('nama_depan') ? 'has-error' : '' }}">
+                        <div class="col-md-6 form-group {{ $errors->has('nama_depan') ? 'has-error' : '' }}">
                             <label for="">Nama Depan</label>
                             <input name="nama_depan" type="text" class="form-control" id="" aria-describedby="emailHelp"
                                 placeholder="Nama Depan" value="{{ old('nama_depan') }}">
                             @if($errors->has('nama_depan'))
-                                <span class="help-block">{{ $errors->first('nama_depan') }}</span>
+                            <span class="help-block">{{ $errors->first('nama_depan') }}</span>
                             @endif
                         </div>
 
@@ -100,52 +97,45 @@
 
                     </div>
 
-                    <div
-                        class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                         <label for="">Email</label>
                         <input name="email" type="email" class="form-control" id="" aria-describedby="emailHelp"
                             placeholder="Email" value="{{ old('email') }}">
                         @if($errors->has('email'))
-                            <span class="help-block">{{ $errors->first('email') }}</span>
+                        <span class="help-block">{{ $errors->first('email') }}</span>
                         @endif
                     </div>
 
-                    <div
-                        class="form-group {{ $errors->has('jenis_kelamin') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('jenis_kelamin') ? 'has-error' : '' }}">
                         <label for="">Kelamin</label>
                         <select name="jenis_kelamin" class="form-control" id="">
-                            <option selected value="L"
-                                {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>
+                            <option selected value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>
                                 Laki-laki</option>
-                            <option value="P"
-                                {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>
+                            <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>
                                 Perempuan</option>
                         </select>
                         @if($errors->has('jenis_kelamin'))
-                            <span class="help-block">{{ $errors->first('jenis_kelamin') }}</span>
+                        <span class="help-block">{{ $errors->first('jenis_kelamin') }}</span>
                         @endif
                     </div>
 
-                    <div
-                        class="form-group {{ $errors->has('agama') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('agama') ? 'has-error' : '' }}">
                         <label for="">Agama</label>
                         <input name="agama" type="text" class="form-control" id="" aria-describedby="emailHelp"
                             placeholder="Agama" value="{{ old('agama') }}">
                         @if($errors->has('agama'))
-                            <span class="help-block">{{ $errors->first('agama') }}</span>
+                        <span class="help-block">{{ $errors->first('agama') }}</span>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="">Alamat</label>
-                        <textarea name="alamat" class="form-control" id=""
-                            rows="2">{{ old('alamat') }}</textarea>
+                        <textarea name="alamat" class="form-control" id="" rows="2">{{ old('alamat') }}</textarea>
                     </div>
-                    <div
-                        class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
+                    <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
                         <label for="">Avatar</label>
                         <input type="file" name="avatar" id="avatar" value="">
                         @if($errors->has('avatar'))
-                            <span class="help-block">{{ $errors->first('avatar') }}</span>
+                        <span class="help-block">{{ $errors->first('avatar') }}</span>
                         @endif
                     </div>
 
@@ -161,15 +151,15 @@
 {{-- End of modal --}}
 @stop
 
-    {{-- Gak dipake --}}
-    @section('content1')
-    @if(session('sukses'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('sukses') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    {{-- Modal delete data (Homework) --}}
-    @endsection
+{{-- Gak dipake --}}
+@section('content1')
+@if(session('sukses'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('sukses') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+{{-- Modal delete data (Homework) --}}
+@endsection

@@ -11,7 +11,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">Dashboard</h3>
               <div class="right">
-                
+
               </div>
             </div>
 
@@ -19,7 +19,7 @@
 
           </div>
         </div>
-                
+
       </div>
     </div>
   </div>

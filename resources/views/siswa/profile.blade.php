@@ -65,7 +65,7 @@
                                 </ul>
                             </div>
                             <div class="text-center">
-                                <a href={{ url()->previous() }} class="btn btn-secondary">Back</a>
+                                <a href={{ url("siswa") }} class="btn btn-secondary">Back</a>
                                 <a href={{ url("siswa/{$siswa->id}/edit") }} class="btn btn-warning">Edit Profie</a>
                             </div>
                         </div>
@@ -77,11 +77,12 @@
                         <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
                             <i class="lnr lnr-plus-circle"></i>&nbsp; Tambah Nilai
                         </button>
+                        {{-- PANEL NILAI --}}
                         <div class="panel">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Mata Pelajaran</h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body table-responsive">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -108,6 +109,17 @@
                                 </table>
                             </div>
                         </div>
+                        {{-- END PANEL NILAI --}}
+                        {{-- PANEL CHART --}}
+                        <div class="panel">
+                            {{-- <div class="panel-heading">
+
+                            </div> --}}
+                            <div class="panel-body" id="chartNilai">
+
+                            </div>
+                        </div>
+                        {{-- END PANEL CHART --}}
                     </div>
                     <!-- END RIGHT COLUMN -->
                 </div>
@@ -163,4 +175,51 @@
     </div>
 </div>
 {{-- End of modal --}}
+@endsection
+
+@section('footer')
+{{-- HIGHCHARTS --}}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+    // ss
+    Highcharts.chart('chartNilai', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Chart Nilai Siswa'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: {!!json_encode($categories)!!},
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Rentang Nilai'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            // pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //     '<td style="padding:0"><b>{point.y:.1f}mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Nilai',
+            data: {!!json_encode($data)!!}
+        }]
+    });
+</script>
 @endsection
