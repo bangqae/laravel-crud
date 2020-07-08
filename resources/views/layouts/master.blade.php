@@ -20,6 +20,8 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
 	<link rel="icon" type="image/png" sizes="96x96" href="{{asset('admin/assets/img/favicon.png')}}">
+	{{-- Include script yang hanya dipakai di view-view tertentu --}}
+	@yield('header')
 </head>
 
 <body>
@@ -55,7 +57,7 @@
 	<script src="{{asset('admin/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 	<script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
-	{{-- Include cdn yang hanya dipakai di view-view tertentu --}}
+	{{-- Include script yang hanya dipakai di view-view tertentu --}}
 	@yield('footer')
 </body>
 

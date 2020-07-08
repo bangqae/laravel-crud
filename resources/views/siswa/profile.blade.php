@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('header')
+{{-- X-EDITABLE --}}
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+    rel="stylesheet" />
+@endsection
+
 @section('content')
 <div class="main">
     <!-- MAIN CONTENT -->
@@ -90,17 +96,27 @@
                                             <th>Mapel</th>
                                             <th>Semester</th>
                                             <th>Nilai</th>
+                                            <th>Guru</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        {{-- Untuk setiap data $siswa yang ada di tabel pivot, lakukan : --}}
                                         @foreach($siswa->mapel as $mapel)
-
+                                        {{-- Disini mapel adalah relasi $siswa ke pivot,  --}}
                                         <tr>
                                             <td>{{ $mapel->kode }}</td>
                                             <td>{{ $mapel->nama }}</td>
                                             <td>{{ $mapel->semester }}</td>
-                                            <td>{{ $mapel->pivot->nilai }}</td>
+                                            <td><a href="#" class="nilai" data-type="number" data-pk="{{$mapel->id}}"
+                                                    data-url="/api/siswa/{{ $siswa->id }}/editnilai"
+                                                    data-title="Masukkan Nilai">{{ $mapel->pivot->nilai }}</a></td>
+                                            <td><a
+                                                    href="/guru/{{ $mapel->guru_id }}/profile">{{ $mapel->guru->nama }}</a>
+                                            </td>
+                                            <td><a href="/siswa/{{ $siswa->id }}/{{ $mapel->id }}/deletenilai"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Yakin mau dihapus ?')">Delete</a></td>
                                         </tr>
 
                                         @endforeach
@@ -178,6 +194,9 @@
 @endsection
 
 @section('footer')
+{{-- X-EDITABLE --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js">
+</script>
 {{-- HIGHCHARTS --}}
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
@@ -220,6 +239,19 @@
             name: 'Nilai',
             data: {!!json_encode($data)!!}
         }]
+    });
+
+    $(document).ready(function() {
+        $('.nilai').editable({
+            type: 'number',
+            min: '0',
+            max: '100',
+            validate: function(value) {
+                if($.trim(value) == '') {
+                    return 'This field is required';
+                }
+            }
+        });
     });
 </script>
 @endsection

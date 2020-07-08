@@ -73,6 +73,6 @@
 @stop
 
 
-    @section('content1')
+@section('content1')
 
-    @endsection
+@endsection
