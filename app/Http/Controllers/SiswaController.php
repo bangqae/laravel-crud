@@ -15,7 +15,8 @@ class SiswaController extends Controller
         } else {
             $data_siswa = Siswa::all();
         }
-        return view('siswa.index',['data_siswa' => $data_siswa]);
+        // return view('siswa.index',['data_siswa' => $data_siswa]);
+        return view('siswa.index', compact('data_siswa'));
     }
 
     public function create(Request $request)
@@ -57,7 +58,8 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $siswa = Siswa::find($id);
-        return view('siswa.edit',['siswa' => $siswa]);
+        // return view('siswa.edit', ['siswa' => $siswa]);
+        return view('siswa.edit', compact('siswa'));
     }
 
     public function update(Request $request,$id)
@@ -87,18 +89,19 @@ class SiswaController extends Controller
         $matapelajaran = \App\Mapel::all();
         //dd($matapelajaran);
         // Menyiapkan data untuk chart
-        $catergories = [];
+        $categories = [];
         $data = [];
 
         foreach ($matapelajaran as $mp) {
             if ($siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()) {
-                $catergories[] = $mp->nama;
+                $categories[] = $mp->nama;
                 $data[] = $siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()->pivot->nilai;
             }
         }
         //dd($data);
         //dd($catergories);
-        return view('siswa.profile',['siswa' => $siswa,'matapelajaran' => $matapelajaran, 'categories' => $catergories, 'data' => $data]);
+        //return view('siswa.profile',['siswa' => $siswa, 'matapelajaran' => $matapelajaran, 'categories' => $categories, 'data' => $data]);
+        return view('siswa.profile', compact('siswa', 'matapelajaran', 'categories', 'data'));
     }
 
     public function addnilai(Request $request, $idsiswa) //$idsiswa disini maksudnya id siswa yg di url, bisa juga ditulis $id

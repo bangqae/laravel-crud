@@ -46,7 +46,7 @@
                                         {{ $siswa->mapel->count() }} <span>Mata Pelajaran</span>
                                     </div>
                                     <div class="col-md-4 stat-item">
-                                        15 <span>Awards</span>
+                                        {{ $siswa->rataRataNilai() }} <span>Rata-rata</span>
                                     </div>
                                     <div class="col-md-4 stat-item">
                                         2174 <span>Points</span>
@@ -145,6 +145,8 @@
     <!-- END MAIN CONTENT -->
 </div>
 
+
+
 {{-- Modal add new data --}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -174,7 +176,7 @@
                     <div class="form-group {{ $errors->has('nilai') ? 'has-error' : '' }}">
                         <label for="nilai">Nilai</label>
                         <input name="nilai" type="number" class="form-control" id="" aria-describedby="emailHelp"
-                            placeholder="Nilai" value="{{ old('nilai') }}">
+                            placeholder="Nilai" value="{{ old('nilai') }}" required>
                         @if($errors->has('nilai'))
                         <span class="help-block">{{ $errors->first('nilai') }}</span>
                         @endif

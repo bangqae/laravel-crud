@@ -8,7 +8,12 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('auths.login');
+        // If user already login, prevent them from access login form
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        } else {
+            return view('auths.login');
+        }
     }
 
     public function postlogin(Request $request)

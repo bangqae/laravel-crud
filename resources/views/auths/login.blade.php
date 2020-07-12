@@ -30,18 +30,21 @@
 					<div class="left">
 						<div class="content">
 							<div class="header">
-								<div class="logo text-center"><img src="{{asset('admin/assets/img/logo-dark.png')}}" alt="Klorofil Logo"></div>
+								<div class="logo text-center"><img src="{{asset('admin/assets/img/logo-dark.png')}}"
+										alt="Klorofil Logo"></div>
 								<p class="lead">Login</p>
 							</div>
 							<form class="form-auth-small" action="/postlogin" method="POST">
 								@csrf
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input name="email" type="email" class="form-control" id="signin-email" value="" placeholder="Email">
+									<input name="email" type="email" class="form-control" id="signin-email" value=""
+										placeholder="Email">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input name="password" type="password" class="form-control" id="signin-password" value="" placeholder="Password">
+									<input name="password" type="password" class="form-control" id="signin-password"
+										value="" placeholder="Password">
 								</div>
 								<div class="form-group clearfix">
 									{{-- <label class="fancy-checkbox element-left">

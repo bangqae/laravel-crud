@@ -28,8 +28,33 @@ class Siswa extends Model
         return $this->belongsToMany(Mapel::class)->withPivot(['nilai'])->withTimeStamps();//Dari tabel pivot mapel_siswa
     }
 
-    public function user()
+    public function rataRataNilai()
     {
-        return $this->belongsTo('App\User');
+        //Disini, $this mengacu pada class siswa
+        //artinya memanggil object siswa
+        //yang sudah dibentuk.
+        //Karena kita ingin mengambil collection, maka ditulis 'mapel'
+        //jika ditulis 'mapel()' maka akan menjadi query builder.
+        $total = 0;
+        $hitung = 0;
+        foreach ($this->mapel as $mapel) {
+            $total += $mapel->pivot->nilai;  
+            $hitung++;
+        }
+        if ($hitung<=0) { //Jika belum ambil mapel
+            return $total; //Return jumlah mapel (0)
+        } else {
+            return round($total/$hitung);
+        }
     }
+
+    public function namaLengkap()
+    {
+        return $this->nama_depan.' '.$this->nama_belakang;
+    }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo('App\User');
+    // }
 }

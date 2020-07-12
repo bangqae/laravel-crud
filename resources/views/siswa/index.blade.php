@@ -21,11 +21,13 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Depan</th>
                                         <th>Nama Belakang</th>
                                         <th>Kelamin</th>
                                         <th>Agama</th>
                                         <th>Alamat</th>
+                                        <th>Rata-rata</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -34,6 +36,7 @@
 
                                 <tr>
 
+                                    <td>{{ $loop->iteration }}</td>
                                     <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_depan }}</a>
                                     </td>
                                     <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_belakang }}</a>
@@ -41,6 +44,8 @@
                                     <td>{{ $siswa->jenis_kelamin }}</td>
                                     <td>{{ $siswa->agama }}</td>
                                     <td>{{ $siswa->alamat }}</td>
+                                    {{-- Untuk memanggil fungsi test harus di dalam objek siswa --}}
+                                    <td>{{ $siswa->rataRataNilai() }}</td>
                                     <td>
                                         <a href="/siswa/{{ $siswa->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
                                         <a href="/siswa/{{ $siswa->id }}/delete" class="btn btn-danger btn-sm"
