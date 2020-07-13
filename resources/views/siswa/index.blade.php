@@ -11,10 +11,15 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">Siswa</h3>
                             <div class="right">
+                                <a href="/siswa/siswapdf" target="_blank" class="btn btn-primary">
+                                    <span class="lnr lnr-eye"></span>
+                                    &nbsp; Preview PDF</a>
+                                <a href="/siswa/exportpdf" class="btn btn-primary">Export Siswa PDF</a>
+                                <a href="/siswa/exportexcel" class="btn btn-primary">Export Siswa Excel</a>
                                 {{-- Button trigger modal --}}
-                                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="lnr lnr-plus-circle"></i>&nbsp; Tambah Data
-                                </button>
+                                <a href="" class="btn btn-light" data-toggle="modal" data-target="#exampleModal"><i
+                                        class="fa fa-plus-square"></i>&nbsp; Tambah
+                                    Data </i></a>
                             </div>
                         </div>
                         <div class="panel-body table-responsive">

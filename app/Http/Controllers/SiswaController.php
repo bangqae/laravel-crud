@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Siswa; //$siswa = App\Siswa::find($idsiswa);
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // Supaya bisa pake helper Str::random
+use App\Exports\SiswaExport; // File export laravel-excel
+use Maatwebsite\Excel\Facades\Excel; // Package laravel-excel
+use PDF; // Facade PDF di app.php
 
 class SiswaController extends Controller
 {
@@ -119,8 +122,26 @@ class SiswaController extends Controller
     public function deletenilai($idsiswa, $idmapel)
     {
         $siswa = Siswa::find($idsiswa);
-        //Perintah detach untuk melepaskan pivotnya
+        // Perintah detach untuk melepaskan pivotnya
         $siswa->mapel()->detach($idmapel);
         return redirect()->back()->with('sukses', 'Data berhasil dihapus');
+    }
+
+    public function exportExcel() 
+    {
+        return Excel::download(new SiswaExport, 'siswa.xlsx');
+    }
+    
+    public function exportPdf() 
+    {
+        $siswa = Siswa::all();
+        $pdf = PDF::loadView('export.siswapdf', compact('siswa'));
+        return $pdf->download('siswa.pdf');
+    }
+
+    public function siswapdf()
+    {
+        $siswa = Siswa::all();
+        return view('export.siswapdf', compact('siswa'));
     }
 }
