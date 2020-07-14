@@ -11,6 +11,11 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">Siswa</h3>
                             <div class="right">
+
+                            </div>
+                        </div>
+                        <div class="panel-body ">
+                            <p class="demo-button">
                                 <a href="/siswa/siswapdf" target="_blank" class="btn btn-primary">
                                     <span class="lnr lnr-eye"></span>
                                     &nbsp; Preview PDF</a>
@@ -20,48 +25,52 @@
                                 <a href="" class="btn btn-light" data-toggle="modal" data-target="#exampleModal"><i
                                         class="fa fa-plus-square"></i>&nbsp; Tambah
                                     Data </i></a>
-                            </div>
-                        </div>
-                        <div class="panel-body table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Depan</th>
-                                        <th>Nama Belakang</th>
-                                        <th>Kelamin</th>
-                                        <th>Agama</th>
-                                        <th>Alamat</th>
-                                        <th>Rata-rata</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
+                            </p>
+                            <p class="demo-button">
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Depan</th>
+                                                <th>Nama Belakang</th>
+                                                <th>Kelamin</th>
+                                                <th>Agama</th>
+                                                <th>Alamat</th>
+                                                <th>Rata-rata</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
 
-                                @foreach($data_siswa as $siswa)
+                                        @foreach($data_siswa as $siswa)
 
-                                <tr>
+                                        <tr>
 
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_depan }}</a>
-                                    </td>
-                                    <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_belakang }}</a>
-                                    </td>
-                                    <td>{{ $siswa->jenis_kelamin }}</td>
-                                    <td>{{ $siswa->agama }}</td>
-                                    <td>{{ $siswa->alamat }}</td>
-                                    {{-- Untuk memanggil fungsi test harus di dalam objek siswa --}}
-                                    <td>{{ $siswa->rataRataNilai() }}</td>
-                                    <td>
-                                        <a href="/siswa/{{ $siswa->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="/siswa/{{ $siswa->id }}/delete" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Yakin mau dihapus ?')">Delete</a>
-                                    </td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td><a href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_depan }}</a>
+                                            </td>
+                                            <td><a
+                                                    href="/siswa/{{ $siswa->id }}/profile">{{ $siswa->nama_belakang }}</a>
+                                            </td>
+                                            <td>{{ $siswa->jenis_kelamin }}</td>
+                                            <td>{{ $siswa->agama }}</td>
+                                            <td>{{ $siswa->alamat }}</td>
+                                            {{-- Untuk memanggil fungsi test harus di dalam objek siswa --}}
+                                            <td>{{ $siswa->rataRataNilai() }}</td>
+                                            <td>
+                                                <a href="/siswa/{{ $siswa->id }}/edit"
+                                                    class="btn btn-warning btn-sm">Edit</a>
+                                                <a href="#" class="btn btn-danger btn-sm delete"
+                                                    siswa-id="{{ $siswa->id }}">Delete</a>
+                                            </td>
 
-                                </tr>
+                                        </tr>
 
-                                @endforeach
+                                        @endforeach
 
-                            </table>
+                                    </table>
+                                </div>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -159,6 +168,26 @@
     </div>
 </div>
 {{-- End of modal --}}
+@endsection
+
+@section('footer')
+<script>
+    $('.delete').click(function(){
+        var siswa_id = $(this).attr('siswa-id');
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location = "/siswa/"+ siswa_id +"/delete";
+            }
+        });
+    });
+</script>
 @stop
 
 {{-- Gak dipake --}}

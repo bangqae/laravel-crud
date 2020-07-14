@@ -1,3 +1,5 @@
+{{-- PDF --}}
+
 <head>
     <style>
         table,

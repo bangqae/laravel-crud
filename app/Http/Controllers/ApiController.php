@@ -8,9 +8,9 @@ class ApiController extends Controller
 {
     public function editnilai(Request $request, $id)
     {
-        $this->validate($request,[
-            'nilai' => 'required',
-        ]);
+        // $this->validate($request,[
+        //     'nilai' => 'required',
+        // ]);
         $siswa = \App\Siswa::find($id);
         $siswa->mapel()->updateExistingPivot($request->pk, ['nilai' => $request->value]);
     }

@@ -58,17 +58,16 @@ class SiswaController extends Controller
         return redirect('/siswa')->with('sukses','Data berhasil diinput!');
     }
 
-    public function edit($id)
+    public function edit(Siswa $siswa)
     {
-        $siswa = Siswa::find($id);
+        //$siswa = Siswa::find($id);
         // return view('siswa.edit', ['siswa' => $siswa]);
         return view('siswa.edit', compact('siswa'));
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, Siswa $siswa)
     {
         // dd($request->all());
-        $siswa = Siswa::find($id);
         $siswa->update($request->all());
         if($request->hasFile('avatar')) {
             $request->file('avatar')->move('images/',$request->file('avatar')->getClientOriginalName());
@@ -78,19 +77,18 @@ class SiswaController extends Controller
         return redirect('/siswa')->with('sukses','Data berhasil diupdate!');
     }
 
-    public function delete($id) 
+    public function delete(Siswa $siswa) 
     {
-        $siswa = Siswa::find($id);
+        $siswa->mapel()->detach(); // Hapus relasi si siswa dengan mapel
         $siswa->delete();
         return redirect('/siswa')->with('sukses','Data berhasil didelete!');
     }
 
-    public function profile($id)
+    public function profile(Siswa $siswa)
     {
-        $siswa = Siswa::find($id);
-        //dd($siswa);
+        // dd($siswa);
         $matapelajaran = \App\Mapel::all();
-        //dd($matapelajaran);
+        // dd($matapelajaran);
         // Menyiapkan data untuk chart
         $categories = [];
         $data = [];
@@ -107,21 +105,19 @@ class SiswaController extends Controller
         return view('siswa.profile', compact('siswa', 'matapelajaran', 'categories', 'data'));
     }
 
-    public function addnilai(Request $request, $idsiswa) //$idsiswa disini maksudnya id siswa yg di url, bisa juga ditulis $id
+    public function addnilai(Request $request, Siswa $siswa) // Route model binding
     {
         //dd($request->all());
-        $siswa = Siswa::find($idsiswa);
         if ($siswa->mapel()->where('mapel_id', $request->mapel)->exists())
         {
-            return redirect('siswa/'.$idsiswa.'/profile')->with('error','Nilai sudah ada!');
+            return redirect('siswa/'.$siswa->id.'/profile')->with('error','Nilai sudah ada!');
         }
-        $siswa->mapel()->attach($request->mapel,['nilai' => $request->nilai]);
-        return redirect('siswa/'.$idsiswa.'/profile')->with('sukses','Nilai tersimpan!');
+        $siswa->mapel()->attach($request->mapel, ['nilai' => $request->nilai]);
+        return redirect('siswa/'.$siswa->id.'/profile')->with('sukses','Nilai tersimpan!');
     }
 
-    public function deletenilai($idsiswa, $idmapel)
+    public function deletenilai(Siswa $siswa, $idmapel)
     {
-        $siswa = Siswa::find($idsiswa);
         // Perintah detach untuk melepaskan pivotnya
         $siswa->mapel()->detach($idmapel);
         return redirect()->back()->with('sukses', 'Data berhasil dihapus');
