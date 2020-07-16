@@ -282,7 +282,7 @@
 
 
 <!-- Start search-course Area -->
-<section class="search-course-area relative">
+{{-- <section class="search-course-area relative">
     <div class="overlay overlay-bg"></div>
     <div class="container">
         <div class="row justify-content-between align-items-center">
@@ -326,6 +326,16 @@
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Name'">
                     <input type="phone" class="form-control" name="phone" placeholder="Your Phone Number"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Phone Number'">
+                    <div class="form-select" id="service-select">
+                        <select>
+                            <option datd-display="">Choose Course</option>
+                            <option value="1">Course One</option>
+                            <option value="2">Course Two</option>
+                            <option value="3">Course Three</option>
+                            <option value="4">Course Four</option>
+                        </select>
+                    </div>
+                    <br>
                     <input type="email" class="form-control" name="email" placeholder="Your Email Address"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'">
                     <div class="form-select" id="service-select">
@@ -337,12 +347,13 @@
                             <option value="4">Course Four</option>
                         </select>
                     </div>
+
                     <button class="primary-btn text-uppercase">Submit</button>
                 </form>
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- End search-course Area -->
 
 

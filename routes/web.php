@@ -11,19 +11,23 @@
 |
 */
 
+//Route Frontend
 Route::get('/', 'SiteController@home');
+Route::get('/register', 'SiteController@register');
+Route::post('/postregister', 'SiteController@postregister');
 
+//Route Login
 Route::get('/login','AuthController@login')->name('login');
 Route::any('/postlogin','AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
 
+//Route Admin, Siswa
 Route::middleware(['auth','checkRole:admin,siswa'])->group(function () {
     Route::get('/dashboard','DashboardController@index');
 });
 
-//Route::group(['middleware' => 'auth'], function () {
+//Route Admin
 Route::middleware(['auth','checkRole:admin'])->group(function () {
-    //Route::get('/dashboard','DashboardController@index');
     Route::get('/siswa','SiswaController@index');
     Route::post('/siswa/create','SiswaController@create');
     Route::get('/siswa/{siswa}/edit','SiswaController@edit');
