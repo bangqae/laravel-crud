@@ -6,7 +6,11 @@
 
 @section('content')
 <!-- start banner Area -->
-<section class="banner-area relative about-banner" id="home">
+<section class="banner-area relative about-banner" id="home" style="
+    background: url('{{ config('sekolah.top_banner_url') }}'); 
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;">
     <div class="overlay overlay-bg"></div>
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
@@ -14,8 +18,8 @@
                 <h1 class="text-white">
                     Pendaftaran
                 </h1>
-                <p class="text-white link-nav"><a href="index.html">Home </a> <span class="lnr lnr-arrow-right"></span>
-                    <a href="courses.html"> Pendaftaran</a></p>
+                <p class="text-white link-nav"><a href="/">Home </a> <span class="lnr lnr-arrow-right"></span>
+                    <a href="/register"> Pendaftaran</a></p>
             </div>
         </div>
     </div>

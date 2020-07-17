@@ -30,8 +30,10 @@
 					<div class="left">
 						<div class="content">
 							<div class="header">
-								<div class="logo text-center"><img src="{{asset('admin/assets/img/logo-dark.png')}}"
-										alt="Klorofil Logo"></div>
+								<div class="logo text-center">
+									{{-- <img src="{{asset('admin/assets/img/logo-dark.png')}}" alt="Klorofil Logo">
+									--}}
+								</div>
 								<p class="lead">Login</p>
 							</div>
 							<form class="form-auth-small" action="/postlogin" method="POST">
@@ -53,17 +55,22 @@
 									</label> --}}
 								</div>
 								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
-								{{-- <div class="bottom">
-									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
-								</div> --}}
+								<div class="bottom">
+									<span class="helper-text"><i class="fa fa-lock"></i> <a href="/register">Belum
+											daftar?</a></span>
+								</div>
 							</form>
 						</div>
 					</div>
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Pengelolaan Data Siswa</h1>
-							<p>by Q</p>
+							<b class="">Pengelolaan Data Siswa</b>
+							<a href="/">
+								<h1 class="heading" style="text-decoration: none;
+								color: #ffffff;">MTs Negeri 2 Pontianak</h1>
+							</a>
+							{{-- <p>by Q</p> --}}
 						</div>
 					</div>
 					<div class="clearfix"></div>
