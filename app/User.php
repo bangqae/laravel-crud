@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function siswa()
-    // {
-    //     return $this->hasOne(Siswa::class);
-    // }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

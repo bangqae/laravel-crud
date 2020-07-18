@@ -200,5 +200,4 @@
     </button>
 </div>
 @endif
-{{-- Modal delete data (Homework) --}}
 @endsection

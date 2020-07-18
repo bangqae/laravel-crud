@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Siswa;
 use App\User;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // Supaya bisa pake helper Str::random
 
@@ -35,5 +36,11 @@ class SiteController extends Controller
         $siswa = Siswa::create($request->all());
 
         return redirect('/')->with('sukses','Data pendaftaran berhasil dikirim!');
+    }
+
+    public function singlepost($slug)
+    {
+        $post = Post::where('slug','=',$slug)->first();
+        return view('sites.singlepost', compact('post'));
     }
 }
