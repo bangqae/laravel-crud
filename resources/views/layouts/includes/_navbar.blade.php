@@ -46,10 +46,9 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{asset('admin/assets/img/user.png')}}"
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="{{asset('admin/assets/img/user.png')}}" {{-- <img src="{{auth()->user()->siswa->getAvatar()}}"--}}
               class="img-circle" alt="Avatar">
-            {{-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{}}" class="img-circle"
-            alt="Avatar"> --}}
             <span>
               {{auth()->user()->name}}
             </span> <i class="icon-submenu lnr lnr-chevron-down"></i>

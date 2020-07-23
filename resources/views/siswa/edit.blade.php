@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('header')
+<title>Edit&nbsp;{{ $siswa->nama_depan }}</title>
+@endsection
+
 @section('content')
 <div class="main">
     <div class="main-content">
@@ -58,7 +62,10 @@
                                     <label for="">Avatar</label>
                                     <input type="file" name="avatar" id="avatar" value="">
                                 </div>
-
+                                <div class="form-group">
+                                    <img src="{{ $siswa->getAvatar() }}" class="img-circle" alt="Avatar"
+                                        style="height: 90px;">
+                                </div>
                                 <a href={{ url("/siswa") }} class="btn btn-secondary">Back</a>
                                 <button type="submit" class="btn btn-warning">Update</button>
                             </form>

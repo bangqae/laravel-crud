@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('header')
+<title>Post</title>
+@endsection
+
 @section('content')
 <div class="main">
     <div class="main-content">
@@ -16,7 +20,7 @@
                         </div>
                         <div class="panel-body ">
                             <p class="demo-button">
-                                <a href="#" class="btn btn-primary">Add New Post</a>
+                                <a href="{{ route('posts.add') }}" class="btn btn-primary">Add New Post</a>
                             </p>
                             <p class="demo-button">
                                 <div class="table-responsive">
@@ -39,7 +43,8 @@
                                             <td>
                                                 <a href="{{ route('sites.singlepost', $post->slug) }}"
                                                     class="btn btn-info btn-sm" target="_blank">View</a>
-                                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                                <a href={{ url("/posts/{$post->id}/edit") }}
+                                                    class="btn btn-warning btn-sm">Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm delete" post-id="">Delete</a>
                                             </td>
                                         </tr>

@@ -60,6 +60,7 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {
+        //dd($siswa);
         //$siswa = Siswa::find($id);
         // return view('siswa.edit', ['siswa' => $siswa]);
         return view('siswa.edit', compact('siswa'));

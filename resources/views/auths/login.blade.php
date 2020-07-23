@@ -2,7 +2,7 @@
 <html lang="en" class="fullscreen-bg">
 
 <head>
-	<title>Login | Klorofil - Free Bootstrap Dashboard Template</title>
+	<title>Login | MTsN2Ptk</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -36,7 +36,7 @@
 								</div>
 								<p class="lead">Login</p>
 							</div>
-							<form class="form-auth-small" action="/postlogin" method="POST">
+							<form class="form-auth-small" action="{{ url('/postlogin') }}" method="POST">
 								@csrf
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
@@ -56,7 +56,8 @@
 								</div>
 								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
 								<div class="bottom">
-									<span class="helper-text"><i class="fa fa-lock"></i> <a href="/register">Belum
+									<span class="helper-text"><i class="fa fa-lock"></i> <a
+											href="{{ url('/register') }}">Belum
 											daftar?</a></span>
 								</div>
 							</form>
@@ -66,7 +67,7 @@
 						<div class="overlay"></div>
 						<div class="content text">
 							<b class="">Pengelolaan Data Siswa</b>
-							<a href="/">
+							<a href="{{ url('/') }}">
 								<h1 class="heading" style="text-decoration: none;
 								color: #ffffff;">MTs Negeri 2 Pontianak</h1>
 							</a>

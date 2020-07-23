@@ -18,8 +18,9 @@
                 <h1 class="text-white">
                     Post
                 </h1>
-                <p class="text-white link-nav"><a href="/">Home </a> <span class="lnr lnr-arrow-right"></span>
-                    <a href="/{{ $post->slug }}"> {{ $post->title }}</a></p>
+                <p class="text-white link-nav"><a href="{{ url('/') }}">Home </a> <span
+                        class="lnr lnr-arrow-right"></span>
+                    <a href={{ url("/{$post->slug}") }}> {{ $post->title }}</a></p>
             </div>
         </div>
     </div>
@@ -47,7 +48,9 @@
                         <div class="user-details row">
                             <p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{ $post->user->name }}</a> <span
                                     class="lnr lnr-user"></span></p>
-                            <p class="date col-lg-12 col-md-12 col-6"><a href="#">{{$post->created_at}}</a> <span
+                            <p class="date col-lg-12 col-md-12 col-6"><a
+                                    {{-- href="#">{{$post->created_at->format('D, d M Y')}}</a> <span --}}
+                                    href="#">{{$post->created_at->diffForHumans()}}</a> <span
                                     class="lnr lnr-calendar-full"></span></p>
                             <ul class="social-links col-lg-12 col-md-12 col-6">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>

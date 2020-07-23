@@ -52,4 +52,9 @@ class Siswa extends Model
     {
         return $this->nama_depan.' '.$this->nama_belakang;
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

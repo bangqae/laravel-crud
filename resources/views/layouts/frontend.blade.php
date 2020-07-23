@@ -59,13 +59,13 @@
       <div class="row align-items-center justify-content-between d-flex">
         <div id="logo">
           {{-- <a href="/"><img src="{{asset('/frontend')}}/img/logo.png" alt="" title="" /></a> --}}
-          <a href="/"><img src="{{ config('sekolah.logo_url') }}" alt="" title="" /></a>
+          <a href="{{ url('/') }}"><img src="{{ config('sekolah.logo_url') }}" alt="" title="" /></a>
         </div>
         <nav id="nav-menu-container">
           <ul class="nav-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/register">Daftar</a></li>
-            <li><a href="/login">Masuk</a></li>
+            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ url('/register') }}">Daftar</a></li>
+            <li><a href="{{ url('/login') }}">Masuk</a></li>
           </ul>
         </nav><!-- #nav-menu-container -->
       </div>

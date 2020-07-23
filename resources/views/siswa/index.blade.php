@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('header')
+<title>Siswa</title>
+@endsection
+
 @section('content')
 <div class="main">
     <div class="main-content">
@@ -58,7 +62,8 @@
                                             {{-- Untuk memanggil fungsi test harus di dalam objek siswa --}}
                                             <td>{{ $siswa->rataRataNilai() }}</td>
                                             <td>
-                                                <a href="/siswa/{{ $siswa->id }}/edit"
+                                                {{-- <a href="/siswa/{{ $siswa->id }}/edit" --}}
+                                                <a href={{ url("/siswa/{$siswa->id}/edit") }}
                                                     class="btn btn-warning btn-sm">Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm delete"
                                                     siswa-id="{{ $siswa->id }}">Delete</a>

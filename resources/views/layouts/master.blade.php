@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
+  {{-- <title>Dashboard</title> --}}
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -23,6 +23,11 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" sizes="96x96" href="{{asset('admin/assets/img/favicon.png')}}">
   {{-- Include script yang hanya dipakai di view-view tertentu --}}
+  <style>
+    .ck-editor__editable_inline {
+      min-height: 300px;
+    }
+  </style>
   @yield('header')
 </head>
 
@@ -61,6 +66,7 @@
   <script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="{{asset('frontend/js/ckeditor.js')}}"></script>
   <script>
     @if(Session::has('sukses'))
       toastr.success("{{ Session::get('sukses') }}", "Sukses");
