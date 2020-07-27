@@ -8,17 +8,25 @@ use Illuminate\Support\Str; // Supaya bisa pake helper Str::random
 use App\Exports\SiswaExport; // File export laravel-excel
 use Maatwebsite\Excel\Facades\Excel; // Package laravel-excel
 use PDF; // Facade PDF di app.php
+// use DataTables;
 
 class SiswaController extends Controller
 {
     public function index(Request $request)
     {
+        // $limit = 20;
+        // $num = num_row($request->input('page'), $limit); // Custom Helper num_row
         if($request->has('cari')){
-            $data_siswa = Siswa::where('nama_depan','LIKE','%'.$request->cari.'%')->get();
+            // Fungsi paginate digunakan untuk menggunakan pagination asli dari laravel
+            // Jika ingin menggunakan datatable, jangan pakai paginate pada controller
+            // $data_siswa = Siswa::where('nama_depan','LIKE','%'.$request->cari.'%')->paginate($limit);
+            $data_siswa = Siswa::where('nama_depan','LIKE','%'.$request->cari.'%')->all();
         } else {
+            // $data_siswa = Siswa::paginate($limit); 
             $data_siswa = Siswa::all();
         }
         // return view('siswa.index',['data_siswa' => $data_siswa]);
+        // return view('siswa.index', compact('data_siswa','num'));
         return view('siswa.index', compact('data_siswa'));
     }
 
@@ -140,5 +148,27 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::all();
         return view('export.siswapdf', compact('siswa'));
+    }
+  
+    public function getdatasiswa()
+    {
+        $siswa = Siswa::select('siswa.*');
+
+        return \DataTables::eloquent($siswa)
+        ->addColumn('nama_lengkap', function($s){
+            return $s->namaLengkap();
+        })
+        ->addColumn('rata2_nilai', function($s){ // Disini $s adalah 1 row data siswa, sedangkan $siswa adalah seluruh data siswa
+            return $s->rataRataNilai();
+        })
+        ->addColumn('aksi', function($s){
+            $editUrl = route('siswa.edit', $s->id); // Advantage of using uses as route
+            $button = '<a href='.$editUrl.' class="btn btn-warning btn-sm" style="margin-right:5px;margin-bottom:5px;">Edit</a>';
+            $button .= '<a href="#" class="btn btn-danger btn-sm delete" siswa-id="'.$s->id.'" style="margin-right:5px;margin-bottom:5px;">Delete</a>';
+            return $button;
+
+        })
+        ->rawColumns(['rata2_nilai','aksi','nama_lengkap'])
+        ->toJson();
     }
 }

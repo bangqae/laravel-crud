@@ -43,9 +43,10 @@
                                             <td>
                                                 <a href="{{ route('sites.singlepost', $post->slug) }}"
                                                     class="btn btn-info btn-sm" target="_blank">View</a>
-                                                <a href={{ url("/posts/{$post->id}/edit") }}
+                                                <a href={{ url("/post/{$post->id}/edit") }}
                                                     class="btn btn-warning btn-sm">Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm delete" post-id="">Delete</a>
+                                                <a href="#" class="btn btn-danger btn-sm delete"
+                                                    post-id="{{ $post->id }}">Delete</a>
                                             </td>
                                         </tr>
 
@@ -76,7 +77,7 @@
         })
         .then((willDelete) => {
             if (willDelete) {
-                window.location = "/posts/"+ post_id +"/delete";
+                window.location = "/post/"+ post_id +"/delete";
             }
         });
     });

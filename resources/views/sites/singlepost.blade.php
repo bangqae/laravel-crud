@@ -20,7 +20,8 @@
                 </h1>
                 <p class="text-white link-nav"><a href="{{ url('/') }}">Home </a> <span
                         class="lnr lnr-arrow-right"></span>
-                    <a href={{ url("/{$post->slug}") }}> {{ $post->title }}</a></p>
+                    <a href={{ url("/{$post->slug}") }}> {{ $post->title }}</a>
+                </p>
             </div>
         </div>
     </div>

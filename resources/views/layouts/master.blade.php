@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <!-- VENDOR CSS -->
-  <!-- asset disini adalah helper laravel untuk mengarahkan ke folder public -->
+  <!-- Disini, asset adalah helper laravel untuk mengarahkan ke folder public -->
   <link rel="stylesheet" href="{{asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/assets/vendor/linearicons/style.css')}}">
@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{asset('admin/assets/css/demo.css')}}">
   {{-- TOASTR --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  {{-- DATATABLE --}}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
   <!-- ICONS -->
@@ -66,6 +68,8 @@
   <script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js">
+  </script>
   <script src="{{asset('frontend/js/ckeditor.js')}}"></script>
   <script>
     @if(Session::has('sukses'))

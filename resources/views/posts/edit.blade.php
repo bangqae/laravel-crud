@@ -38,7 +38,7 @@
 
                                     </div>
 
-                                    <div class="col-md-4"> {{-- thumbnail --}}
+                                    <div class="col-md-4" style="padding-bottom:15px;"> {{-- thumbnail --}}
                                         <label for="">Thumbnail</label>
                                         <div class="input-group">
                                             <span class="input-group-btn">

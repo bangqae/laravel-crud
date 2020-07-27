@@ -31,7 +31,15 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
     // Siswa
     Route::get('/siswa', 'SiswaController@index');
     Route::post('/siswa/create', 'SiswaController@create');
-    Route::get('/siswa/{siswa}/edit', 'SiswaController@edit');
+    // Meh
+    // Route::get('/siswa/{siswa}/edit', 'SiswaController@edit');
+
+    // Better, uses as route
+    Route::get('/siswa/{siswa}/edit', [
+        'uses' => 'SiswaController@edit',
+        'as' => 'siswa.edit'
+    ]);
+
     Route::post('/siswa/{siswa}/update', 'SiswaController@update');
     Route::get('/siswa/{siswa}/delete', 'SiswaController@delete');
     Route::get('/siswa/{siswa}/profile', 'SiswaController@profile');
@@ -51,21 +59,34 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
     Route::post('/post/create', [
         'uses' => 'PostController@create',
         'as' => 'posts.create'
-        ]);
+    ]);
 
-    Route::get('/posts/{post}/edit', 'PostController@edit');
+    Route::get('/post/{post}/edit', [
+        'uses' => 'PostController@edit',
+        'as' => 'posts.edit'
+    ]);
 
-    Route::post('/post/update', [
+    Route::post('/post/{post}/update', [
         'uses' => 'PostController@update',
         'as' => 'posts.update'
     ]);
-    
+
+    Route::get('/post/{post}/delete', [
+        'uses' => 'PostController@delete',
+        'as' => 'posts.delete'
+    ]);
 });
 
 // Route Filemanager, prevent unauthorized upload
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+
+//  Ajax yajra datatable
+Route::get('getdatasiswa', [
+    'uses' => 'SiswaController@getdatasiswa',
+    'as' => 'ajax.get.data.siswa',
+]);
 
 // Route View Post, paling bawah agar yang lain tidak dibaca sebagai slug
 Route::get('/{slug}', [

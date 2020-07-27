@@ -39,11 +39,18 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        
+        $post = Post::update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => auth()->user()->id,
+            'thumbnail' => $request->thumbnail
+        ]);
+        return redirect()->route('posts.index')->with('sukses','Post berhasil diupdate!');
     }
 
-    public function delete(Siswa $siswa) 
+    public function delete(Post $post) 
     {
-        
+        $post->delete();
+        return redirect()->route('posts.index')->with('sukses','Data berhasil didelete!');
     }
 }
