@@ -595,13 +595,13 @@
                 </div>
                 <p class="meta">{{$post->created_at->format('d M, Y')}} | By <a href="#">{{ $post->user->name }}</a></p>
                 <a href={{ url("/{$post->slug}") }}>
-                    <h5>{{ $post->title }}</h5>
-                </a>
-                {!! $post->content !!}
-                {{-- <a href="{{ route('sites.singlepost', $post->slug) }}" --}}
-                <a href={{ url("/{$post->slug}") }}
-                    class="details-btn d-flex justify-content-center align-items-center"><span
-                        class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{{ route('sites.singlepost', $post->slug) }}">
+                        <h5>{{ $post->title }}</h5>
+                    </a>
+                    {!! $post->content !!}
+                    <a href="{{ route('sites.singlepost', $post->slug) }}"
+                        class="details-btn d-flex justify-content-center align-items-center"><span
+                            class="details">Details</span><span class="lnr lnr-arrow-right"></span></a>
             </div>
             @endforeach
 

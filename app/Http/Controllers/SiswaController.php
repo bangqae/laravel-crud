@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Siswa; //$siswa = App\Siswa::find($idsiswa);
+use App\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // Supaya bisa pake helper Str::random
 use App\Exports\SiswaExport; // File export laravel-excel
@@ -96,7 +97,7 @@ class SiswaController extends Controller
     public function profile(Siswa $siswa)
     {
         // dd($siswa);
-        $matapelajaran = \App\Mapel::all();
+        $matapelajaran = Mapel::all();
         // dd($matapelajaran);
         // Menyiapkan data untuk chart
         $categories = [];
@@ -155,8 +156,13 @@ class SiswaController extends Controller
         $siswa = Siswa::select('siswa.*');
 
         return \DataTables::eloquent($siswa)
+        ->addColumn('no', function($s){
+            return $no = '0'; // Just passing a value to prevent error
+        })
         ->addColumn('nama_lengkap', function($s){
-            return $s->namaLengkap();
+            $profiletUrl = route('siswa.profile', $s->id);
+            $nameLink = '<a href='.$profiletUrl.'>'.$s->namaLengkap().'</a>';
+            return $nameLink;
         })
         ->addColumn('rata2_nilai', function($s){ // Disini $s adalah 1 row data siswa, sedangkan $siswa adalah seluruh data siswa
             return $s->rataRataNilai();
@@ -168,7 +174,23 @@ class SiswaController extends Controller
             return $button;
 
         })
-        ->rawColumns(['rata2_nilai','aksi','nama_lengkap'])
+        ->rawColumns(['rata2_nilai','aksi','nama_lengkap','no'])
         ->toJson();
+    }
+
+    public function profilsaya()
+    {
+        $siswa = auth()->user()->siswa;
+        $matapelajaran = Mapel::all();
+        $categories = [];
+        $data = [];
+
+        foreach ($matapelajaran as $mp) {
+            if ($siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()) {
+                $categories[] = $mp->nama;
+                $data[] = $siswa->mapel()->wherePivot('mapel_id', $mp->id)->first()->pivot->nilai;
+            }
+        }
+        return view('siswa.profilsaya', compact('siswa','matapelajaran', 'categories', 'data'));
     }
 }

@@ -12,18 +12,25 @@
 */
 
 //Route Frontend
-Route::get('/', 'SiteController@home');
+// Route::get('/', 'SiteController@home');
+Route::get('/', [
+    'uses' => 'SiteController@home',
+    'as' => 'home'
+]);
 Route::get('/register', 'SiteController@register');
 Route::post('/postregister', 'SiteController@postregister');
 
 //Route Login
 Route::get('/login','AuthController@login')->name('login');
 Route::any('/postlogin','AuthController@postlogin');
-Route::get('/logout', 'AuthController@logout');
+Route::get('/logout', [
+    'uses' => 'AuthController@logout',
+    'as' => 'logout'
+]);
 
 //Route Admin, Siswa
 Route::middleware(['auth','checkRole:admin,siswa'])->group(function () {
-    Route::get('/dashboard','DashboardController@index');
+    Route::get('/dashboard','DashboardController@index')->name('dashboard');
 });
 
 //Route Admin
@@ -33,7 +40,7 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
     Route::post('/siswa/create', 'SiswaController@create');
     // Meh
     // Route::get('/siswa/{siswa}/edit', 'SiswaController@edit');
-
+    
     // Better, uses as route
     Route::get('/siswa/{siswa}/edit', [
         'uses' => 'SiswaController@edit',
@@ -42,7 +49,7 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
 
     Route::post('/siswa/{siswa}/update', 'SiswaController@update');
     Route::get('/siswa/{siswa}/delete', 'SiswaController@delete');
-    Route::get('/siswa/{siswa}/profile', 'SiswaController@profile');
+    Route::get('/siswa/{siswa}/profile', 'SiswaController@profile')->name('siswa.profile');
     Route::post('/siswa/{siswa}/addnilai', 'SiswaController@addnilai');
     Route::get('/siswa/{siswa}/{idmapel}/deletenilai', 'SiswaController@deletenilai');
     Route::get('/siswa/exportexcel', 'SiswaController@exportExcel');
@@ -56,6 +63,7 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
         'uses' => 'PostController@add',
         'as' => 'posts.add' // Yang sebenarnya diakses
     ]);
+
     Route::post('/post/create', [
         'uses' => 'PostController@create',
         'as' => 'posts.create'
@@ -75,18 +83,22 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
         'uses' => 'PostController@delete',
         'as' => 'posts.delete'
     ]);
+    //  Ajax yajra datatable
+    Route::get('getdatasiswa', [
+        'uses' => 'SiswaController@getdatasiswa',
+        'as' => 'ajax.get.data.siswa',
+    ]);
+});
+
+//Route Siswa
+Route::middleware(['auth','checkRole:siswa'])->group(function () {
+    Route::get('profilsaya','SiswaController@profilsaya')->name('siswa.profilsaya');
 });
 
 // Route Filemanager, prevent unauthorized upload
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
-
-//  Ajax yajra datatable
-Route::get('getdatasiswa', [
-    'uses' => 'SiswaController@getdatasiswa',
-    'as' => 'ajax.get.data.siswa',
-]);
 
 // Route View Post, paling bawah agar yang lain tidak dibaca sebagai slug
 Route::get('/{slug}', [

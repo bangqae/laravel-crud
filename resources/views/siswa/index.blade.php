@@ -58,7 +58,7 @@
                                     <table class="table table-hover" id="datatable">
                                         <thead>
                                             <tr>
-                                                {{-- <th>No</th> --}}
+                                                <th></th>
                                                 {{-- <th>Nama Depan</th> --}}
                                                 <th>Nama Lengkap</th>
                                                 <th>Kelamin</th>
@@ -176,13 +176,12 @@
     // document ready akan dijalankan ketika semua document sudah ter-load
     $(document).ready(function(){ 
         // Datatable
-        $('#datatable').DataTable({
+        var t = $('#datatable').DataTable({
             processing:true,
             serverside:true,
             ajax:"{{route('ajax.get.data.siswa')}}", // Where the data retrieve
             columns:[
-                // {data:'nama_depan',name:'nama_depan'},
-                // {data:'nama_belakang',name:'nama_belakang'},
+                {data:'no',name:'no'}, // Call a value to prevent error in row number, though not being used at all
                 {data:'nama_lengkap',name:'nama_lengkap'},
                 {data:'jenis_kelamin',name:'jenis_kelamin'},
                 {data:'agama',name:'agama'},
@@ -190,7 +189,20 @@
                 {data:'rata2_nilai',name:'rata2_nilai'},
                 {data:'aksi',name:'aksi'},
             ],
+            // Row number
+            columnDefs: [{
+                searchable: false,
+                orderable: false,
+                targets: 0
+            }],
+            order: [[ 1, 'asc' ]]
         });
+
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            });
+        }).draw();
         
         // Swal
         // $('.delete').click(function(){
@@ -249,9 +261,22 @@
 
 {{-- Pagination bawaan laravel, letakkan diluar tag table --}}
 {{-- {{ $data_siswa->links() }} --}}
-
-
-
-
-
+<script>
+    // Datatable
+        $('#datatable').DataTable({
+            processing:true,
+            serverside:true,
+            ajax:"{{route('ajax.get.data.siswa')}}", // Where the data retrieve
+            columns:[
+                // {data:'nama_depan',name:'nama_depan'},
+                // {data:'nama_belakang',name:'nama_belakang'},
+                {data:'nama_lengkap',name:'nama_lengkap'},
+                {data:'jenis_kelamin',name:'jenis_kelamin'},
+                {data:'agama',name:'agama'},
+                {data:'alamat',name:'alamat'},
+                {data:'rata2_nilai',name:'rata2_nilai'},
+                {data:'aksi',name:'aksi'},
+            ],
+        });
+</script>
 @endsection

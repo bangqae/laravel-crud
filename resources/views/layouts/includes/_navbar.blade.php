@@ -47,17 +47,20 @@
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{asset('admin/assets/img/user.png')}}" {{-- <img src="{{auth()->user()->siswa->getAvatar()}}"--}}
-              class="img-circle" alt="Avatar">
+            @if(Auth::check() && Auth::user()->role == "admin")
+            <img src="{{asset('images/default2.jpg')}}" class="img-circle" alt="Avatar" height="22px">
+            @elseif (Auth::check())
+            <img src="{{auth()->user()->siswa->getAvatar()}}" class="img-circle" alt="Avatar" height="22px">
+            @endif
             <span>
               {{auth()->user()->name}}
             </span> <i class="icon-submenu lnr lnr-chevron-down"></i>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-            <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-            <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-            <li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+            <li><a href="{{ route('siswa.profilsaya') }}"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+            {{-- <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+            <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li> --}}
+            <li><a href="{{ route('logout') }}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
           </ul>
         </li>
         <!-- <li>

@@ -18,7 +18,7 @@
                 <h1 class="text-white">
                     Post
                 </h1>
-                <p class="text-white link-nav"><a href="{{ url('/') }}">Home </a> <span
+                <p class="text-white link-nav"><a href="{{ route('home') }}">Home </a> <span
                         class="lnr lnr-arrow-right"></span>
                     <a href={{ url("/{$post->slug}") }}> {{ $post->title }}</a>
                 </p>

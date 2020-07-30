@@ -41,7 +41,10 @@ class SiteController extends Controller
 
     public function singlepost($slug)
     {
-        $post = Post::where('slug','=',$slug)->first();
+        // Im using firstOrfail() instead first()
+        // So whenever user trying to put random slug on random url
+        // It will fail
+        $post = Post::where('slug','=',$slug)->firstOrfail();
         return view('sites.singlepost', compact('post'));
     }
 }

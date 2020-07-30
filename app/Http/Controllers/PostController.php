@@ -39,7 +39,8 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $post = Post::update([
+        Post::where('id', $post->id)
+        ->update([
             'title' => $request->title,
             'content' => $request->content,
             'user_id' => auth()->user()->id,
