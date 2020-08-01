@@ -89,9 +89,7 @@
                                             <td>{{ $mapel->nama }}</td>
                                             <td>{{ $mapel->semester }}</td>
                                             <td>{{ $mapel->pivot->nilai }}</td>
-                                            <td><a
-                                                    href="/guru/{{ $mapel->guru_id }}/profile">{{ $mapel->guru->nama }}</a>
-                                            </td>
+                                            <td>{{ $mapel->guru->nama }}</td>
                                         </tr>
 
                                         @endforeach

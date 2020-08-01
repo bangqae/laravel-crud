@@ -21,23 +21,27 @@
                         <div class="panel-body ">
                             <div class="row">
                                 <div class="col-md-3">
+                                    <a href="" class="btn btn-light btn-block" data-toggle="modal"
+                                        data-target="#importExcel" type=""><i class="fa fa-plus-square"></i>&nbsp;
+                                        Import Excel</a>
+                                </div>
+                                {{-- <div class="col-md-3">
                                     <a href="/siswa/siswapdf" target="_blank" class="btn btn-primary btn-block" type="">
                                         <span class="lnr lnr-eye"></span>
                                         &nbsp; Preview PDF</a>
+                                </div> --}}
+                                <div class="col-md-3">
+                                    <a href="/siswa/exportpdf" class="btn btn-primary btn-block" type="">
+                                        Export PDF</a>
                                 </div>
                                 <div class="col-md-3">
-                                    <a href="/siswa/exportpdf" class="btn btn-primary btn-block" type="">Export Siswa
-                                        PDF</a>
-                                </div>
-                                <div class="col-md-3">
-                                    <a href="/siswa/exportexcel" class="btn btn-primary btn-block" type="">Export Siswa
-                                        Excel</a>
+                                    <a href="/siswa/exportexcel" class="btn btn-primary btn-block" type="">
+                                        Export Excel</a>
                                 </div>
                                 <div class="col-md-3">
                                     <a href="" class="btn btn-light btn-block" data-toggle="modal"
-                                        data-target="#exampleModal" type=""><i class="fa fa-plus-square"></i>&nbsp;
-                                        Tambah
-                                        Data </i></a>
+                                        data-target="#tambahData" type=""><i class="fa fa-plus-square"></i>&nbsp;
+                                        Tambah Data </i></a>
                                 </div>
                             </div>
                             {{-- <p class="demo-button">
@@ -82,7 +86,7 @@
 </div>
 
 {{-- Modal add new data --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="tambahData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -165,6 +169,28 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+{{-- End of modal --}}
+
+{{-- Modal import excel --}}
+<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="panel-title" id="exampleModalLabel">Import Excel</h5>
+            </div>
+            {!! Form::open(['route'=>'siswa.import', 'class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])!!}
+            <div class="modal-body">
+                {!! Form::file('data_siswa') !!}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                {!! Form::submit('Import', ['class'=>'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ use App\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // Supaya bisa pake helper Str::random
 use App\Exports\SiswaExport; // File export laravel-excel
+use App\Imports\SiswaImport; // File import laravel-excel
 use Maatwebsite\Excel\Facades\Excel; // Package laravel-excel
 use PDF; // Facade PDF di app.php
 // use DataTables;
@@ -192,5 +193,11 @@ class SiswaController extends Controller
             }
         }
         return view('siswa.profilsaya', compact('siswa','matapelajaran', 'categories', 'data'));
+    }
+
+    public function importExcel(Request $request)
+    {
+        Excel::import(new SiswaImport, $request->file('data_siswa'));
+        return redirect('siswa')->with('sukses','Data tersimpan!');
     }
 }

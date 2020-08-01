@@ -11,7 +11,7 @@
 |
 */
 
-//Route Frontend
+// Route Frontend
 // Route::get('/', 'SiteController@home');
 Route::get('/', [
     'uses' => 'SiteController@home',
@@ -20,7 +20,7 @@ Route::get('/', [
 Route::get('/register', 'SiteController@register');
 Route::post('/postregister', 'SiteController@postregister');
 
-//Route Login
+// Route Login
 Route::get('/login','AuthController@login')->name('login');
 Route::any('/postlogin','AuthController@postlogin');
 Route::get('/logout', [
@@ -28,7 +28,7 @@ Route::get('/logout', [
     'as' => 'logout'
 ]);
 
-//Route Admin, Siswa
+// Route Admin, Siswa
 Route::middleware(['auth','checkRole:admin,siswa'])->group(function () {
     Route::get('/dashboard','DashboardController@index')->name('dashboard');
 });
@@ -40,18 +40,19 @@ Route::middleware(['auth','checkRole:admin'])->group(function () {
     Route::post('/siswa/create', 'SiswaController@create');
     // Meh
     // Route::get('/siswa/{siswa}/edit', 'SiswaController@edit');
-    
     // Better, uses as route
     Route::get('/siswa/{siswa}/edit', [
         'uses' => 'SiswaController@edit',
         'as' => 'siswa.edit'
     ]);
-
     Route::post('/siswa/{siswa}/update', 'SiswaController@update');
     Route::get('/siswa/{siswa}/delete', 'SiswaController@delete');
     Route::get('/siswa/{siswa}/profile', 'SiswaController@profile')->name('siswa.profile');
     Route::post('/siswa/{siswa}/addnilai', 'SiswaController@addnilai');
     Route::get('/siswa/{siswa}/{idmapel}/deletenilai', 'SiswaController@deletenilai');
+    // Import
+    Route::post('/siswa/import', 'SiswaController@importExcel')->name('siswa.import');
+    // Export
     Route::get('/siswa/exportexcel', 'SiswaController@exportExcel');
     Route::get('/siswa/exportpdf', 'SiswaController@exportPdf');
     Route::get('/siswa/siswapdf', 'SiswaController@siswapdf');

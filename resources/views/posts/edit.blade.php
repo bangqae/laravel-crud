@@ -17,7 +17,9 @@
                         </div>
                         <div class="panel-body ">
                             <div class="row">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('posts.update', $post->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    {{-- @method('patch') --}}
                                     @csrf
                                     <div class="col-md-8"> {{-- form --}}
                                         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
