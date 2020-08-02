@@ -22,7 +22,7 @@
                                 <img src="{{ $siswa->getAvatar() }}" class="img-circle" alt="Avatar" height="90px"
                                     width="90px">
                                 <h3 class="name">
-                                    {{ $siswa->nama_depan }}&nbsp;{{ $siswa->nama_belakang }}
+                                    {{ $siswa->namaLengkap() }}
                                 </h3>
                                 <span class="online-status status-available">Available</span>
                             </div>

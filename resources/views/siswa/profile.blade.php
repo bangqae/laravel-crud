@@ -39,7 +39,7 @@
                             {{-- Method getAvatar() dari model Siswa --}}
                             <img src="{{ $siswa->getAvatar() }}" class="img-circle" alt="Avatar" height="90px"
                                 width="90px">
-                            <h3 class="name">{{ $siswa->nama_depan }}&nbsp;{{ $siswa->nama_belakang }}</h3>
+                            <h3 class="name">{{ $siswa->namaLengkap() }}</h3>
                             <span class="online-status status-available">Available</span>
                         </div>
                         <div class="profile-stat">

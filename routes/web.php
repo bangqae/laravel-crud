@@ -11,6 +11,14 @@
 |
 */
 
+// Kirim Email Test
+// Route::get('/kirimemail', function() {
+//     \Mail::raw('halo siswa baru', function ($message) {
+//         $message->to('qaedinahri.16@gmail.com', 'Qaedi');
+//         $message->subject('Pendaftaran Siswa');
+//     });
+// });
+
 // Route Frontend
 // Route::get('/', 'SiteController@home');
 Route::get('/', [
