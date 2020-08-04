@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Mail\Markdown;
+
 // Kirim Email Test
 // Route::get('/kirimemail', function() {
 //     \Mail::raw('halo siswa baru', function ($message) {
@@ -107,6 +109,12 @@ Route::middleware(['auth','checkRole:siswa'])->group(function () {
 // Route Filemanager, prevent unauthorized upload
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+// Preview email pendaftaran
+Route::get('mail', function () {
+    $markdown = new Markdown(view(), config('mail.markdown'));
+    return $markdown->render('emails.sites.pendaftaran');
 });
 
 // Route View Post, paling bawah agar yang lain tidak dibaca sebagai slug

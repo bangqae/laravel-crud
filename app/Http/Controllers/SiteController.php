@@ -7,6 +7,7 @@ use App\User;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str; // Supaya bisa pake helper Str::random
+use App\Mail\NotifPendaftaranSiswa;
 
 class SiteController extends Controller
 {
@@ -35,14 +36,10 @@ class SiteController extends Controller
         // Insert ke tabel siswa
         $request->request->add(['user_id' => $user->id]);
         $siswa = Siswa::create($request->all());
-
-        // Mailtrap
-        \Mail::raw('Selamat datang '.$user->name, function ($message) use($user){
-            $message->to($user->email, $user->name);
-            $message->subject('Selamat anda sudah terdaftar di sekolah kami');
-        });
-
-        return redirect('/')->with('sukses','Data pendaftaran berhasil dikirim!');
+        
+        // Mail
+        \Mail::to($user->email)->send(new NotifPendaftaranSiswa);
+        return redirect('/')->with('sukses','Data pendaftaran berhasil dikirim ,silahkan cek email!');
     }
 
     public function singlepost($slug)
