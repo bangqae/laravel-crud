@@ -21,6 +21,12 @@ use Illuminate\Mail\Markdown;
 //     });
 // });
 
+// Part 35
+Route::get('/test', [
+    'uses' => 'TestController@test',
+    'as' => 'test'
+]);
+
 // Route Frontend
 // Route::get('/', 'SiteController@home');
 Route::get('/', [

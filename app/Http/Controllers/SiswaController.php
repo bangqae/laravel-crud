@@ -10,6 +10,7 @@ use App\Exports\SiswaExport; // File export laravel-excel
 use App\Imports\SiswaImport; // File import laravel-excel
 use Maatwebsite\Excel\Facades\Excel; // Package laravel-excel
 use PDF; // Facade PDF di app.php
+use App\User;
 // use DataTables;
 
 class SiswaController extends Controller
@@ -44,7 +45,7 @@ class SiswaController extends Controller
         ]);
         
         // Insert ke tabel users
-        $user = new  \App\User;
+        $user = new User;
         $user->role = 'siswa';
         $user->name = $request->nama_depan;
         $user->email = $request->email;
